@@ -1,0 +1,26 @@
+{
+    "name": "bjnstnkvc/mail-components",
+    "description": "Simple Laravel Mail components",
+    "type": "package",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Bjnstnkvc\\MailComponents\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Bojan Stankovic",
+            "email": "dev.bojan.stankovic@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Bjnstnkvc\\MailComponents\\MailComponentsServiceProvider"
+            ]
+        }
+    }
+}

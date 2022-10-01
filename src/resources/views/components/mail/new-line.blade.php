@@ -1,0 +1,1 @@
+<tr>    <td @if ($background) style="background-color:{{ $background }};" @endif  @if ($height) height="{{ $height }}" style="font-size:{{ $height }}px; line-height:{{ $height }}px;" @endif >        {!! $height ? '' : '&nbsp;' !!}    </td></tr>
