@@ -123,9 +123,5 @@ class MailComponentsServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/resources/views/vendor/mail/html/themes/mail-components.css' => $this->resourcePath . '/mail-components.css',
         ], 'mail-styles');
-
-        $this->publishes([
-            __DIR__ . '/resources/views/vendor/mail/html/themes/mail-components.css' => $this->publicPath . '/mail-components.css',
-        ], 'mail-styles');
     }
 }
