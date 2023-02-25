@@ -90,12 +90,13 @@ In order to render the component, use the following syntax:
 
 List of all properties Header component accepts is as follows:
 
-| Property  | Description                                                   |
-|-----------|---------------------------------------------------------------|
-| logo      | Header logo (accepts image url or asset path as an argument). |
-| width     | Header logo width.                                            |
-| height    | Header logo height.                                           |
-| show-logo | Determine whether to show Header Logo (defaults to `true`).   |
+| Property  | Description                                                      |
+|-----------|------------------------------------------------------------------|
+| app-url   | Header logo app url (defaults to `APP_URL` property from `.env`). |
+| logo      | Header logo (accepts image url or asset path as an argument).    |
+| width     | Header logo width.                                               |
+| height    | Header logo height.                                              |
+| show-logo | Determine whether to show Header Logo (defaults to `true`).      |
 
 In order to render the component, use the following syntax:
 
