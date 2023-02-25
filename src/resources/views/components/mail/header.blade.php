@@ -6,7 +6,7 @@
                 <x-mail::new-line />
 
                 <x-mail::content>
-                    <a href="{{ config('app.url') }}">
+                    <a href="{{ $appUrl }}">
                         <img class="logo" src="{{ $logo }}" alt="{{ config('app.name') }} logo" width="{{ $width }}" height="{{ $height }}" />
                     </a>
                 </x-mail::content>

@@ -9,6 +9,11 @@ use Illuminate\View\Component;
 class Header extends Component
 {
     /**
+     * @var string Header app url.
+     */
+    public $appUrl;
+
+    /**
      * @var string Header logo.
      */
     public $logo;
@@ -33,8 +38,9 @@ class Header extends Component
      *
      * @return void
      */
-    public function __construct($logo = null, $width = null, $height = null, $showLogo = null)
+    public function __construct($appUrl = null, $logo = null, $width = null, $height = null, $showLogo = null)
     {
+        $this->appUrl   = $appUrl ?: config('mail_components.header.app_url');
         $this->logo     = $logo ?: config('mail_components.header.logo');
         $this->width    = $width ?: config('mail_components.header.width');
         $this->height   = $height ?: config('mail_components.header.height');

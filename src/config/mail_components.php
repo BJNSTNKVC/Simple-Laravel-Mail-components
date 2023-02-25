@@ -44,10 +44,11 @@ return [
 
     // Mail Header component settings.
     'header'     => [
-        'show'   => true,
-        'logo'   => 'https://via.placeholder.com/100x100',
-        'width'  => 75,
-        'height' => 75,
+		'show'    => true,
+        'app_url' => config('app.url'),
+        'logo'    => 'https://via.placeholder.com/100x100',,
+        'width'   => 75,
+        'height'  => 75,
     ],
 
     // Mail Footer component info.

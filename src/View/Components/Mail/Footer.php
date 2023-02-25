@@ -55,7 +55,7 @@ class Footer extends Component
      */
     public function __construct($email = null, $country = null, $state = null, $city = null, $address = null, $zip = null, $phone = null, $showCopyright = null)
     {
-        $this->email         = $email ?: config('mail.from.address');
+        $this->email         = $email ?: config('mail_components.footer.email');
         $this->country       = $country ?: config('mail_components.footer.country');
         $this->state         = $state ?: config('mail_components.footer.state');
         $this->city          = $city ?: config('mail_components.footer.city');
