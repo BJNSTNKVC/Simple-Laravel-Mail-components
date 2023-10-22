@@ -148,7 +148,7 @@ table {
 .table {
     display   : inline-block;
     overflow  : auto;
-    /*width     : 100%;*/
+    width     : calc(100vw - 16px);
     max-width : 600px;
 }
 

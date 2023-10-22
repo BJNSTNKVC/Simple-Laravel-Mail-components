@@ -75,13 +75,13 @@ class Publisher
 
     public function __construct()
     {
-        $this->classRoot          = __DIR__ . '\..\Views\Components\Mail\\';
+        $this->classRoot          = __DIR__ . '\..\View\Components\Mail\\';
         $this->viewsRoot          = __DIR__ . '\..\resources\views\components\mail\\';
         $this->configPath         = config_path('mail_components.php');
         $this->viewPath           = resource_path('views\components\mail\\');
-        $this->defaultNamespace   = 'Bjnstnkvc\MailComponents\Views\Components\Mail';
+        $this->defaultNamespace   = 'Bjnstnkvc\MailComponents\View\Components\Mail';
         $this->publishedNamespace = 'App\View\Components\Form';
-        $this->defaultPath        = 'Bjnstnkvc\MailComponents\Views\Components\Mail\\';
+        $this->defaultPath        = 'Bjnstnkvc\MailComponents\View\Components\Mail\\';
         $this->publishedPath      = 'App\View\Components\Form\\';
         $this->defaultBlade       = 'mail-components::mail.';
         $this->publishedBlade     = 'components.mail.';

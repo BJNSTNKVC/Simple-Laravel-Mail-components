@@ -30,7 +30,8 @@ This will publish a `mail-components.css` to `resources/views/vendor/mail/html/t
 
 ### Theme
 
-If you like to render an email via [Markdown](https://laravel.com/docs/9.x/mail#markdown-mailables), you'll need to set Mailable `theme` property to `mail-components`.
+If you like to render an email via [Markdown](https://laravel.com/docs/9.x/mail#markdown-mailables), you'll need to set
+Mailable `theme` property to `mail-components`.
 
 ```php
     /**
@@ -90,13 +91,13 @@ In order to render the component, use the following syntax:
 
 List of all properties Header component accepts is as follows:
 
-| Property  | Description                                                      |
-|-----------|------------------------------------------------------------------|
+| Property  | Description                                                       |
+|-----------|-------------------------------------------------------------------|
 | app-url   | Header logo app url (defaults to `APP_URL` property from `.env`). |
-| logo      | Header logo (accepts image url or asset path as an argument).    |
-| width     | Header logo width.                                               |
-| height    | Header logo height.                                              |
-| show-logo | Determine whether to show Header Logo (defaults to `true`).      |
+| logo      | Header logo (accepts image url or asset path as an argument).     |
+| width     | Header logo width.                                                |
+| height    | Header logo height.                                               |
+| show-logo | Determine whether to show Header Logo (defaults to `true`).       |
 
 In order to render the component, use the following syntax:
 
@@ -116,16 +117,17 @@ If you'd like to add additional content to the header, use the following syntax:
 
 List of all properties Footer component accepts is as follows:
 
-| Property       | Description                                                         |
-|----------------|---------------------------------------------------------------------|
-| email          | Footer Email address.                                               |
-| country        | Footer country.                                                     |
-| state          | Footer state.                                                       |
-| city           | Footer city.                                                        |
-| address        | Footer street address.                                              |
-| zip            | Footer zip code.                                                    |
-| phone          | Footer phone number.                                                |
-| show-copyright | Determine whether to display Footer copyright (defaults to `true`). |
+| Property       | Description                                                             |
+|----------------|-------------------------------------------------------------------------|
+| email          | Footer Email address.                                                   |
+| country        | Footer country.                                                         |
+| state          | Footer state.                                                           |
+| city           | Footer city.                                                            |
+| address        | Footer street address.                                                  |
+| zip            | Footer zip code.                                                        |
+| phone          | Footer phone number.                                                    |
+| show           | Determine whether to display the Footer (defaults to `true`).           |
+| show-copyright | Determine whether to display the Footer copyright (defaults to `true`). |
 
 In order to render the component, use the following syntax:
 
@@ -319,10 +321,10 @@ In both cases, following table would be generated:
 
 Let's say we have users table with the following data:
 
-| id  | first_name | last_name | email                | email_verified_at   | created_at          | updated_at          | role_id |
-|-----|------------|-----------|----------------------|---------------------|---------------------|---------------------|---------|
-| 1   | John       | Doe       | john.doe@example.com | 2022-09-01 12:00:00 | 2022-09-30 22:00:00 | 2022-09-01 12:00:00 | 2       |
-| 2   | Jane       | Doe       | jane.doe@example.com | 2022-09-01 10:00:00 | 2022-09-30 23:00:00 | 2022-09-01 12:00:00 | 3       |
+| id | first_name | last_name | email                | email_verified_at   | created_at          | updated_at          | role_id |
+|----|------------|-----------|----------------------|---------------------|---------------------|---------------------|---------|
+| 1  | John       | Doe       | john.doe@example.com | 2022-09-01 12:00:00 | 2022-09-30 22:00:00 | 2022-09-01 12:00:00 | 2       |
+| 2  | Jane       | Doe       | jane.doe@example.com | 2022-09-01 10:00:00 | 2022-09-30 23:00:00 | 2022-09-01 12:00:00 | 3       |
 
 passed from the controller:
 
@@ -508,11 +510,13 @@ class VerifyEmail extends Mailable
     }
 }
 ```
-Next step would be to create a [view](https://laravel.com/docs/9.x/mail#configuring-the-view). For this example, we'll create `verify-email.blade.php` file in `resources/views/emails` directory.
+
+Next step would be to create a [view](https://laravel.com/docs/9.x/mail#configuring-the-view). For this example, we'll
+create `verify-email.blade.php` file in `resources/views/emails` directory.
 
 Finally, we'll use Mail Components to create an HTML for aforementioned email.
 
-Let's start with creating our basic Layout with Header and Footer. Blade syntax below: 
+Let's start with creating our basic Layout with Header and Footer. Blade syntax below:
 
 ```blade
 <x-mail::layout title="Verify Email">
@@ -550,7 +554,7 @@ which will generate following HTML:
 
 ![Verify Email Example 2](docs/images/Example%202.png)
 
-We'll add a Subcopy with verification link as a string in case the user has trouble verifying an email via button. 
+We'll add a Subcopy with verification link as a string in case the user has trouble verifying an email via button.
 
 ```blade
 <x-mail::layout title="Verify Email">
@@ -590,7 +594,8 @@ now, our email looks as follows:
 
 
 - **layout** - *Array containing Mail Components Layout settings.*
-    - **font_link** - *Font link that the Mail Components will use. (E.g. https://fonts.googleapis.com/css2?family=Roboto&display=swap).*
+    - **font_link** - *Font link that the Mail Components will use. (
+      E.g. https://fonts.googleapis.com/css2?family=Roboto&display=swap).*
     - **font_family** - *Font family name (E.g. Roboto).*
     - **background** - *Layout Component background color.*
 
@@ -604,7 +609,8 @@ now, our email looks as follows:
 
 - **footer** - *Array containing Mail Components Footer settings.*
     - **show** - *Determines whether the Footer Mail Component will be visible (defaults to `true`).*
-    - **show_copyright** - *Determines whether the Footer Mail Component copyright line will be visible (defaults to `true`).*
+    - **show_copyright** - *Determines whether the Footer Mail Component copyright line will be visible (defaults
+      to `true`).*
     - **address** - *Street address of your business.*
     - **city** - *City of your business.*
     - **state** - *State of your business.*
@@ -618,7 +624,8 @@ now, our email looks as follows:
 
 - **grid** - *Array containing Mail Components Grid settings.*
     - **background** - *Grid Component background color.*
-    - **spacing** - *Renders spacing between Grid and other components (options: `none`, `top`, `bottom`, `top, bottom`).*
+    - **spacing** - *Renders spacing between Grid and other components (
+      options: `none`, `top`, `bottom`, `top, bottom`).*
 
 
 - **hero** - *Array containing Mail Components Hero settings.*
@@ -651,7 +658,6 @@ now, our email looks as follows:
     - **height** - *New Line height (defaults to `16`).*
     - **background** - *New Line background color*
 
-    
 > **Note:** You might need to clear config cache using `php artisan cache:clear` command after you make changes
 > to `.env` file.
 

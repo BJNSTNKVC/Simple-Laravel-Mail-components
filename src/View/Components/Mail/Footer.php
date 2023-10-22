@@ -44,7 +44,12 @@ class Footer extends Component
     public $phone;
 
     /**
-     * @var bool Determine whether to display Footer copyright.
+     * @var bool Determine whether to display the Footer.
+     */
+    public $show;
+
+    /**
+     * @var bool Determine whether to display the Footer copyright.
      */
     public $showCopyright;
 
@@ -53,7 +58,7 @@ class Footer extends Component
      *
      * @return void
      */
-    public function __construct($email = null, $country = null, $state = null, $city = null, $address = null, $zip = null, $phone = null, $showCopyright = null)
+    public function __construct($email = null, $country = null, $state = null, $city = null, $address = null, $zip = null, $phone = null, $show = null, $showCopyright = null)
     {
         $this->email         = $email ?: config('mail_components.footer.email');
         $this->country       = $country ?: config('mail_components.footer.country');
@@ -62,6 +67,7 @@ class Footer extends Component
         $this->address       = $address ?: config('mail_components.footer.address');
         $this->zip           = $zip ?: config('mail_components.footer.zip');
         $this->phone         = $phone ?: config('mail_components.footer.phone');
+        $this->show          = filter_var($show ?: config('mail_components.footer.show'), FILTER_VALIDATE_BOOLEAN);
         $this->showCopyright = filter_var($showCopyright ?: config('mail_components.footer.show_copyright'), FILTER_VALIDATE_BOOLEAN);
     }
 

@@ -46,7 +46,7 @@ return [
     'header'     => [
 		'show'    => true,
         'app_url' => config('app.url'),
-        'logo'    => 'https://via.placeholder.com/100x100',,
+        'logo'    => 'https://via.placeholder.com/100x100',
         'width'   => 75,
         'height'  => 75,
     ],
@@ -55,11 +55,11 @@ return [
     'footer'     => [
         'show'           => true,
         'show_copyright' => true,
-        'address'        => 'Address',
-        'city'           => 'City',
-        'state'          => 'State',
-        'zip'            => 'Zip',
-        'phone'          => 'Phone',
+        'address'        => null,
+        'city'           => null,
+        'state'          => null,
+        'zip'            => null,
+        'phone'          => null,
     ],
 
     // Mail Content component settings.
