@@ -29,16 +29,22 @@ class Layout extends Component
     public $fontFamily;
 
     /**
+     * @var string|null Head Slot.
+     */
+    public $head;
+
+    /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($background = null, $title = null, $font = null, $fontFamily = null, $isMarkdown = null)
+    public function __construct($background = null, $title = null, $font = null, $fontFamily = null, $head = null, $isMarkdown = null)
     {
         $this->background = $background ?: config('mail_components.layout.background');
         $this->title      = $title ?: config('app.name');
         $this->font       = $font ?: config('mail_components.layout.font_link');
         $this->fontFamily = $fontFamily ?: config('mail_components.layout.font_family');
+        $this->head       = $head;
     }
 
     /**
