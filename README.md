@@ -201,11 +201,11 @@ standard [Blade Slot syntax](https://laravel.com/docs/9.x/blade#slots):
 
 ```blade
 <x-mail::grid columns="2">
-    <x-slot name="one">
+    <x-slot:one>
         <h1>Column 1 Title</h1>
         <p>Column 1 paragraph</p>
     </x-slot>
-    <x-slot name="two">
+    <x-slot:two>
         <h1>Column 2 Title</h1>
         <p>Column 2 paragraph</p>
     </x-slot>
@@ -242,11 +242,11 @@ standard [Blade Slot syntax](https://laravel.com/docs/9.x/blade#slots):
 
 ```blade
 <x-mail::hero background="https://via.placeholder.com/1200x800">
-    <x-slot name="title">
+    <x-slot:title>
         <h1>Title</h1>
     </x-slot>
 
-    <x-slot name="subtitle">
+    <x-slot:subtitle>
         <ol>
             <li>Item 1</li>
             <li>Item 2</li>
@@ -254,7 +254,7 @@ standard [Blade Slot syntax](https://laravel.com/docs/9.x/blade#slots):
         </ol>
     </x-slot>
 
-    <x-slot name="button">
+    <x-slot:button>
         <a class="button btn-black" href="#">Button</a>
     </x-slot>
 </x-mail::hero>
