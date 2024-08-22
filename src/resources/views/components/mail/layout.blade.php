@@ -86,6 +86,8 @@
             }
         }
     </style>
+
+    {{ $head }}
 </head>
 <body bgcolor="{{ $background }}">
 <table {{ $attributes->merge(['class' => 'wrapper']) }} width="100%" border="0" cellpadding="0" cellspacing="0">
