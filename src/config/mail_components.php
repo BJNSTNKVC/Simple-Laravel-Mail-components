@@ -33,18 +33,16 @@ return [
     // Mail Components separator (E.g. <x-mail::button>).
     'separator'  => '::',
 
-    // Mail font link and font family.
+    // Mail Layout component settings.
     'layout'     => [
         'font_link'   => 'https://fonts.googleapis.com/css2?family=Roboto&display=swap',
         'font_family' => 'Roboto',
         'background'  => '#F2F2F2',
     ],
 
-    // Mail background color.
-
     // Mail Header component settings.
     'header'     => [
-		'show'    => true,
+        'show'    => true,
         'app_url' => config('app.url'),
         'logo'    => 'https://via.placeholder.com/100x100',
         'width'   => 75,
@@ -105,7 +103,7 @@ return [
     ],
 
     // Mail New Line component settings.
-    'new_line' => [
+    'new_line'   => [
         'height'     => 16,
         'background' => 'transparent',
     ],

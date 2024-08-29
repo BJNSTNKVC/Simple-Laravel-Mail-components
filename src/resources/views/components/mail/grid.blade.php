@@ -8,7 +8,7 @@
                 <td align="center" valign="top">
                     <table {{ $attributes->merge(['class' => "container grid grid-col-$columns"]) }} width="600" cellpadding="0" cellspacing="0" border="0">
                         <tr>
-                            <td {{ $one?->attributes->merge(['class' => "mobile"]) }} align="center" valign="top">
+                            <td {{ $one ? $one->attributes->merge(['class' => "mobile"]) : null }} align="center" valign="top">
                                 {{ $one ?: $slot }}
                             </td>
                             @if ($columns >= 2)

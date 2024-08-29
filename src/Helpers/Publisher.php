@@ -20,6 +20,7 @@ class Publisher
 
     /**
      * Components published config path.
+     *
      * @var string
      */
     public $configPath;
@@ -77,7 +78,7 @@ class Publisher
     {
         $this->classRoot          = __DIR__ . '\..\View\Components\Mail\\';
         $this->viewsRoot          = __DIR__ . '\..\resources\views\components\mail\\';
-        $this->configPath         = config_path('mail_components.php');
+        $this->configPath         = file_exists(config_path('mail_components.php')) ? config_path('mail_components.php') : __DIR__ . '\..\config\mail_components.php';
         $this->viewPath           = resource_path('views\components\mail\\');
         $this->defaultNamespace   = 'Bjnstnkvc\MailComponents\View\Components\Mail';
         $this->publishedNamespace = 'App\View\Components\Form';
@@ -96,7 +97,7 @@ class Publisher
      */
     public function getClass(string $class): string
     {
-        return $this->classRoot . $class . '.php';
+        return "{$this->classRoot}{$class}.php";
     }
 
     /**
@@ -108,7 +109,7 @@ class Publisher
      */
     public function getView(string $view): string
     {
-        return $this->viewsRoot . $view . '.blade.php';
+        return "{$this->viewsRoot}{$view}.blade.php";
     }
 
     /**
@@ -120,7 +121,7 @@ class Publisher
      */
     public function publishClass(string $class): string
     {
-        return $this->publishedPath . $class . '.php';
+        return "{$this->publishedPath}{$class}.php";
     }
 
     /**
@@ -132,7 +133,7 @@ class Publisher
      */
     public function publishView(string $view): string
     {
-        return $this->viewPath . $view . '.blade.php';
+        return "{$this->viewPath}{$view}.blade.php";
     }
 
     /**
@@ -163,8 +164,8 @@ class Publisher
     public function updateConfig(string $class, string $config)
     {
         return str_replace(
-            $this->defaultPath . $class . '::class',
-            $this->publishedPath . $class . '::class',
+            "{$this->defaultPath}{$class}::class",
+            "{$this->publishedPath}{$class}::class",
             $config
         );
     }

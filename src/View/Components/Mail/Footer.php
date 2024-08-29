@@ -54,6 +54,16 @@ class Footer extends Component
     public $showCopyright;
 
     /**
+     * @var string Full address of the Footer.
+     */
+    public $fullAddress;
+
+    /**
+     * @var string Google Map URL for the Footer.
+     */
+    public $mapUrl;
+
+    /**
      * Create a new component instance.
      *
      * @return void
@@ -69,6 +79,37 @@ class Footer extends Component
         $this->phone         = $phone ?: config('mail_components.footer.phone');
         $this->show          = filter_var($show ?: config('mail_components.footer.show'), FILTER_VALIDATE_BOOLEAN);
         $this->showCopyright = filter_var($showCopyright ?: config('mail_components.footer.show_copyright'), FILTER_VALIDATE_BOOLEAN);
+        $this->fullAddress   = $this->getFullAddress($this->address, $this->city, $this->zip, $this->state);
+        $this->mapUrl        = $this->getMapUrl($this->address, $this->city, $this->zip);
+    }
+
+    /**
+     * Get the full address.
+     *
+     * @param string|null $address
+     * @param string|null $city
+     * @param string|null $zip
+     * @param string|null $state
+     *
+     * @return string
+     */
+    private function getFullAddress(?string $address = null, ?string $city = null, ?string $zip = null, ?string $state = null): string
+    {
+        return collect(func_get_args())->filter()->implode(', ');
+    }
+
+    /**
+     * Get the Google Map URL.
+     *
+     * @param string|null $address
+     * @param string|null $city
+     * @param string|null $zip
+     *
+     * @return string
+     */
+    private function getMapUrl(?string $address = null, ?string $city = null, ?string $zip = null): string
+    {
+        return 'https://www.google.com/maps/place/' . collect(func_get_args())->filter()->implode(', ');
     }
 
     /**

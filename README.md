@@ -34,17 +34,13 @@ If you like to render an email via [Markdown](https://laravel.com/docs/9.x/mail#
 Mailable `theme` property to `mail-components`.
 
 ```php
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
-    public function build()
-    {
-        $this->theme = 'mail-components';
-
-        return $this->markdown('emails.orders.shipped');
-    }
+/**
+ * Create a new message instance.
+ */
+public function __construct()
+{
+    $this->theme = 'mail-components';
+}
 ```
 
 or set `theme` property to `mail-components` in your `config/mail.php` file:
@@ -72,18 +68,29 @@ handles media queries for responsiveness.
 
 List of all properties Layout component accepts is as follows:
 
-| Property    | Description                                                                                                  |
-|-------------|--------------------------------------------------------------------------------------------------------------|
-| background  | Layout Background color (accepts all [color values](https://www.w3schools.com/cssref/css_colors_legal.asp)). |
-| title       | Layout title.                                                                                                |
-| font        | Layout font url.                                                                                             |
-| font-family | Layout font family                                                                                           |
+| Property    | Description                                                                                                                                               |
+|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| background  | Layout Background color (accepts all [color values](https://www.w3schools.com/cssref/css_colors_legal.asp)).                                              |
+| title       | Layout title.                                                                                                                                             |
+| font        | Layout font url.                                                                                                                                          |
+| font-family | Layout font family                                                                                                                                        |
+| is-markdown | Determine whether the email is Markdown formatted or not. If set to true, all classes except media queries from style tag will be omitted from the email. |
 
 In order to render the component, use the following syntax:
 
 ```blade
 <x-mail::layout>
     ...
+</x-mail::layout>
+```
+
+If you'd like to add additional content to the `<head>` tag of the layout, use the following syntax:
+
+```blade
+<x-mail::layout>
+    <x-slot:head>
+        ...
+    </x-slot>
 </x-mail::layout>
 ```
 
@@ -459,54 +466,42 @@ Let's say we want to create a Verification Email that gets sent when the user su
 
 First, we'll create a Mail class using following artisan command:
 
-    php artisan make:mail VerifyEmail
+    php artisan make:mail VerificationMail
 
-Command above will create a `VerifyEmail.php` Mail class with the same name in `app\Mail` directory.
+Command above will create a `VerificationMail.php` Mail class with the same name in `app\Mail` directory.
 
 Next step would be to attach data that we'll use to the class.
 
 ```php
-class VerifyEmail extends Mailable
+class VerificationMail extends Mailable
 {
-    use Queueable, SerializesModels;
-
-    /**
-     * User model.
-     */
-    public $user;
-    
-    /**
-     * Verification Email.
-     */
-    public $email;
-
-    /**
-     * Verification Email token.
-     */
-    public $token;
-
     /**
      * Create a new message instance.
-     *
-     * @return void
      */
-    public function __construct($user, $email, $token)
+    public function __construct(public User $user, public string $email, public string $token)
     {
-        $this->user  = $user;
-        $this->email = $email;
-        $this->token = $token;
+        // 
+    }
+    
+    /**
+     * Get the message envelope.
+     */
+    public function envelope(): Envelope
+    {
+        return new Envelope(
+            from   : new Address('example@example.com', 'Example'),
+            subject: 'Verify Email',
+        );
     }
 
     /**
-     * Build the message.
-     *
-     * @return $this
+     * Get the message content definition.
      */
-    public function build()
+    public function content(): Content
     {
-        return $this->from('example@example.com', 'Example')
-                    ->subject('Verify Email')
-                    ->view('emails.verify-email');
+        return new Content(
+            view: 'mail.verification-mail',
+        );
     }
 }
 ```

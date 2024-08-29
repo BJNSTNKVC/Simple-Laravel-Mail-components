@@ -34,17 +34,34 @@ class Layout extends Component
     public $head;
 
     /**
+     * @var string Layout CSS Stylesheet.
+     */
+    public $stylesheet;
+
+    /**
+     * @var boolean Whether the email is Markdown formatted or not.
+     */
+    public $isMarkdown;
+
+    /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($background = null, $title = null, $font = null, $fontFamily = null, $head = null, $isMarkdown = null)
+    public function __construct($background = null, $title = null, $font = null, $fontFamily = null, $head = null, $isMarkdown = false)
     {
         $this->background = $background ?: config('mail_components.layout.background');
         $this->title      = $title ?: config('app.name');
         $this->font       = $font ?: config('mail_components.layout.font_link');
         $this->fontFamily = $fontFamily ?: config('mail_components.layout.font_family');
         $this->head       = $head;
+        $this->isMarkdown = $isMarkdown;
+
+        if (!file_exists($stylesheet = resource_path('views/vendor/mail/html/themes/mail-components.css'))) {
+            $stylesheet = base_path('vendor/bjnstnkvc/mail-components/src/resources/views/vendor/mail/html/themes/mail-components.css');
+        }
+
+        $this->stylesheet = file_get_contents($stylesheet);
     }
 
     /**

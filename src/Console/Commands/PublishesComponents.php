@@ -34,57 +34,42 @@ class PublishesComponents extends Command
      */
     public function handle(Filesystem $filesystem, Publisher $publisher)
     {
-        // Get Components to publish.
-        $arguments = array_map(function ($data) {
+        $arguments = collect($this->argument('component'))->map(function (string $data) {
             return Str::slug(Str::snake($data));
-        }, $this->argument('component'));
+        });
 
         // Get 'key - value' pairs of components that the User inputted, or return all if no arguments where passed.
-        $components = $arguments
+        $components = $arguments->isNotEmpty()
             ? Arr::only(config('mail_components.components'), $arguments)
             : config('mail_components.components');
 
         foreach ($components as $view => $class) {
-            // Get the class name from the Component config path.
-            $class = Str::of($class)->explode('\\')->last();
-
-            // Get the Component class file.
-            $class_file = $filesystem->get($publisher->getClass($class));
-
-            // Get the Components' config file.
-            $config = $filesystem->get($publisher->configPath);
-
-            // Update Component Class file.
-            $updated_class_file = $publisher->updateClass($view, $class_file);
-
-            // Update Component config file.
+            $class               = Str::of($class)->explode('\\')->last();
+            $class_file          = $filesystem->get($publisher->getClass($class));
+            $config              = $filesystem->get($publisher->configPath);
+            $updated_class_file  = $publisher->updateClass($view, $class_file);
             $updated_config_file = $publisher->updateConfig($class, $config);
 
-            // In case Class and resource folders do not exist, create them.
             $filesystem->ensureDirectoryExists($publisher->publishedPath);
             $filesystem->ensureDirectoryExists($publisher->viewPath);
 
-            // Check if the Component already exists.
             if ($filesystem->exists($publisher->publishClass($class))) {
-                //  In case 'force' option is passed, overwrite the existing files, otherwise, show the warning message.
                 if ($this->option('force')) {
                     $filesystem->put($publisher->publishClass($class), $updated_class_file);
                     $filesystem->copy($publisher->getView($view), $publisher->publishView($view));
                     $filesystem->put($publisher->configPath, $updated_config_file);
                 } else {
-                    $this->warn('File ' . $class . '.php already exists!');
+                    $this->warn("File {$class}.php already exists!");
 
                     continue;
                 }
             }
 
-            // Publish Form Component, View and config file.
             $filesystem->put($publisher->publishClass($class), $updated_class_file);
             $filesystem->copy($publisher->getView($view), $publisher->publishView($view));
             $filesystem->put($publisher->configPath, $updated_config_file);
 
-            // Display status message.
-            $this->info('Successfully published ' . $class . ' component class!');
+            $this->info("Successfully published {$class} component class!");
         }
     }
 }

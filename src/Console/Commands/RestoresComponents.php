@@ -34,37 +34,27 @@ class RestoresComponents extends Command
      */
     public function handle(Filesystem $filesystem, Publisher $publisher)
     {
-        // Get Components to restore.
-        $arguments = array_map(function ($data) {
+        $arguments = collect($this->argument('component'))->map(function (string $data) {
             return Str::slug(Str::snake($data));
-        }, $this->argument('component'));
+        });
 
-        // Get 'key - value' pairs of components that the User inputted, or return all if no arguments where passed.
-        $components = $arguments
-            ? Arr::only(config('form_components.components'), $arguments)
-            : Arr::only(config('form_components.components'), $this->getPublishedComponents($publisher));
+        $components = $arguments->isNotEmpty()
+            ? Arr::only(config('mail_components.components'), $arguments)
+            : Arr::only(config('mail_components.components'), $this->getPublishedComponents($publisher));
 
         foreach ($components as $view => $class) {
-            // Get the class name from the Component config path.
-            $class_name = Str::of($class)->explode('\\')->last();
-
-            // Get the Components' config file.
-            $config = $filesystem->get($publisher->configPath);
-
-            // Get Component config file contents.
+            $class_name           = Str::of($class)->explode('\\')->last();
+            $config               = $filesystem->get($publisher->configPath);
             $restored_config_file = $publisher->restoreClass($class_name, $config);
 
-            // If option 'delete' has been passed, remove Component Class and View files.
             if ($this->option('delete')) {
                 $filesystem->delete($publisher->publishClass($class_name));
                 $filesystem->delete($publisher->publishView($view));
             }
 
-            // Restore Component config file.
             $filesystem->put($publisher->configPath, $restored_config_file);
 
-            // Display status message.
-            $this->info('Successfully restored ' . $class_name . ' component class!');
+            $this->info("Successfully restored {$class_name} component class!");
         }
     }
 
@@ -79,10 +69,11 @@ class RestoresComponents extends Command
     {
         $published_components = scandir($publisher->publishedPath);
 
-        array_splice($published_components, 0, 2);
-
-        return array_map(function ($data) {
-            return Str::slug(Str::snake(Str::replaceFirst('.php', '', $data)));
-        }, $published_components);
+        return collect($published_components)
+            ->splice(2)
+            ->map(function (string $data) {
+                return Str::slug(Str::snake(Str::replaceFirst('.php', '', $data)));
+            })
+            ->toArray();
     }
 }

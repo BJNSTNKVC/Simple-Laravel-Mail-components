@@ -21,13 +21,13 @@
                 @if($address || $city || $zip || $state || $phone)
                     <x-mail::content>
 
-                        <a href="{{ 'https://www.google.com/maps/place/' . urlencode(($address ? $address . ', ' : '') . ' ' . ($city ? $city . ', ' : '') . $zip) }}">{{ ($address ?: '') . ($address && ($city || $state || $zip) ? ', ' : '') . ($city ?: '') . ($city && ($state || $zip) ? ', ' : '') . ($state ?: '') . ($state && $zip ? ' ' : '') . $zip }}</a>
+                        <a href="{{ $mapUrl }}">{{ $fullAddress }}</a>
 
                         @if($phone)
                             @if($address || $city || $zip || $state)
                                 •
                             @endif
-                            <a href="tel:{{ preg_replace('/[^[:digit:]]/', '', $phone) }}}">{{ $phone }}</a>
+                            <a href="tel:{{ preg_replace('/[^[:digit:]]/', '', $phone) }}">{{ $phone }}</a>
                         @endif
 
                     </x-mail::content>
