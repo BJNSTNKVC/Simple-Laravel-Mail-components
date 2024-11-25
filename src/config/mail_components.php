@@ -105,6 +105,7 @@ return [
     // Mail New Line component settings.
     'new_line'   => [
         'height'     => 16,
+        'as_table'   => false,
         'background' => 'transparent',
     ],
 ];

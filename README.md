@@ -447,10 +447,11 @@ standard [Blade Slot syntax](https://laravel.com/docs/9.x/blade#slots):
 
 List of all properties New Line component accepts is as follows:
 
-| Property   | Description                      |
-|------------|----------------------------------|
-| height     | New Line Break height.           |
-| background | New Line Break background color. |
+| Property   | Description                                                    |
+|------------|----------------------------------------------------------------|
+| height     | New Line Break height.                                         |
+| asTable    | Determine whether the component should be rendered as a table. |
+| background | New Line Break background color.                               |
 
 In order to render the component, use the following syntax:
 
@@ -651,6 +652,7 @@ now, our email looks as follows:
 
 - **new_line** - *Array containing Mail Components New Line settings.*
     - **height** - *New Line height (defaults to `16`).*
+    - **as_table** - *Determine whether the component should be rendered as a table (defaults to `false`).*
     - **background** - *New Line background color*
 
 > **Note:** You might need to clear config cache using `php artisan cache:clear` command after you make changes

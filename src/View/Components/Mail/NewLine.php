@@ -14,6 +14,11 @@ class NewLine extends Component
     public $height;
 
     /**
+     * @var string Determine whether the component should be rendered as a table.
+     */
+    public $asTable;
+
+    /**
      * @var string New Line Break background color.
      */
     public $background;
@@ -23,10 +28,11 @@ class NewLine extends Component
      *
      * @return void
      */
-    public function __construct($height = null, $background = null)
+    public function __construct($height = null, $asTable = false, $background = null)
     {
         $this->height     = $height ?: config('mail_components.new_line.height');
-        $this->background = $background ?: config('mail_components.new_line.background');;
+        $this->asTable    = $asTable ?? config('mail_components.new_line.as_table');
+        $this->background = $background ?: config('mail_components.new_line.background');
     }
 
     /**
